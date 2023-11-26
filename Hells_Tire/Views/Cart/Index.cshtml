@@ -1,0 +1,73 @@
+﻿@model CartViewModel
+
+@if (Model.CartItems.Count > 0)
+{
+    <div class="uren-cart-area">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <form action="javascript:void(0)">
+                        <div class="table-content table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="uren-product-remove"></th>
+                                        <th class="uren-product-thumbnail">Наименование</th>
+                                        <th class="cart-product-name">Стоимость</th>
+                                        <th class="uren-product-price">Количество</th>
+                                        <th class="uren-product-quantity">Итого</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                        @foreach (var item in Model.CartItems)
+                                        {
+                                        <tr>
+                                            @if (item.Images != null)
+                                            {
+                                                var base64 = Convert.ToBase64String(item.Images);
+                                                var imgSrc = string.Format("data:image/png;base64,{0}", base64);
+                                                    <td class="uren-product-thumbnail"><a href="javascript:void(0)"><img src="@imgSrc" style="width: 100px; height: 100px;"></a></td>
+                                            }
+                                            
+                                            <td class="uren-product-name"><a href="javascript:void(0)">@item.ProductName</a></td>
+                                            <td class="uren-product-price">@item.Price.ToString("C2")</td>
+                                            <td class="quantity">
+                                                <label>@item.Quantity</label>
+                                                    <a asp-action="Add" asp-route-id="@item.Id">+</a>
+                                                    <a asp-action="Decrease" asp-route-id="@item.Id">-</a>
+                                                    <a asp-action="Remove" asp-route-id="@item.Id">Remove</a>
+                                            </td>
+                                            <td>@Model.CartItems.Where(x => x.Id == item.Id).Sum(x => x.Quantity * x.Price).ToString("C2")</td>
+
+                                        </tr>
+                                        }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 ml-auto">
+                                <div class="cart-page-total">
+                                    <h2>Итог</h2>
+                                    <ul>
+                                        <li>Стоимость: @Model.GrandTotal.ToString("C2")</li>
+                                    </ul>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form method="post" asp-controller="Cart" asp-action="CreateOrder">
+                        <!-- Ваш текущий код -->
+                        <button type="submit" class="uren-login_btn">Оформить заказ</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+else
+{
+    <h2 class="display-4 text-center">Ваша корзина пуста.</h2>
+}

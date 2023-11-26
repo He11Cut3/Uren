@@ -1,0 +1,70 @@
+﻿@model Hells_Tire.Models.HellsTireProduct
+
+
+<h1>Изменить продукт</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="HellsTireProductID" />
+
+            <div class="form-group">
+                <label asp-for="HellsTireProductName" class="control-label">Наименование</label>
+                <input asp-for="HellsTireProductName" class="form-control" />
+                <span asp-validation-for="HellsTireProductName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="HellsTireProductBrand" class="control-label">Бренд</label>
+                <input asp-for="HellsTireProductBrand" class="form-control" />
+                <span asp-validation-for="HellsTireProductBrand" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="HellsTireProductDescriptions" class="control-label">Описание</label>
+                <textarea asp-for="HellsTireProductDescriptions" class="form-control"></textarea>
+                <span asp-validation-for="HellsTireProductDescriptions" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="HellsTireProductPrice" class="control-label">Цена</label>
+                <input asp-for="HellsTireProductPrice" class="form-control" />
+                <span asp-validation-for="HellsTireProductPrice" class="text-danger"></span>
+            </div>
+            @if(Model!= null)
+            {
+                <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.HellsTireProductImage)" alt="Previous Image" />
+            }
+               
+            <div class="form-group">
+                <label>Категория</label>
+                <select asp-for="HellsTireCategoryID" class="form-control" asp-items="ViewBag.Categories">
+                    <option value="0">Выберите категорию</option>
+                </select>
+                <span asp-validation-for="HellsTireCategoryID" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ImageFile" class="control-label">Загрузите фотографию</label>
+                <input type="file" id="files" asp-for="ImageFile" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-primary">Изменить</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Вернуться обратно</a>
+</div>
+
+<script src="https://cdn.ckeditor.com/4.19.0/standard/ckeditor.js"></script>
+<script>
+
+    CKEDITOR.replace('HellsTireProductDescriptions');
+</script>
+

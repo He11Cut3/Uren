@@ -1,0 +1,44 @@
+﻿@model User
+<body class="template-color-1">
+
+    <div class="main-wrapper">
+        <div class="uren-login-register_area">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-6 col-xs-12">
+                        <form asp-action="Create">
+                            <div class="login-form">
+                                <div asp-validation-summary="All" class="text-danger"></div>
+
+                                <div class="col-md-12 col-12">
+                                    <label asp-for="UserName" class="control-label"> Логин</label>
+                                    <input asp-for="UserName" class="form-control" />
+                                    <span asp-validation-for="UserName" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-12 col-12">
+                                    <label asp-for="Email" class="control-label"> Почта</label>
+                                    <input asp-for="Email" class="form-control" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-12 mb--20">
+                                    <label asp-for="Password" class="control-label"> Пароль</label>
+                                    <input asp-for="Password" class="form-control" />
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-12 mb--20">
+                                    <button class="uren-login_btn">Регистрация</button>
+                                </div>
+                            </div>
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<!-- Uren's Login Register Area  End Here -->

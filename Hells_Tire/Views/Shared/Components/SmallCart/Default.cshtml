@@ -1,0 +1,22 @@
+﻿@model SmallCartViewModel
+
+<div class="custom-cart_col col-12">
+    <div class="header-right_area">
+        <ul>
+                <a class="minicart-btn toolbar-btn">
+                    <div class="minicart-front_text">
+                        @if (Model != null)
+                        {
+
+                            <a href="@Url.Action("Index", "Cart")">Корзина: @Model.TotalAmount.ToString("C2")</a>
+                            
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Index", "Cart")">Корзина: 0</a>
+                        }
+                    </div>
+                </a>
+        </ul>
+    </div>
+</div>

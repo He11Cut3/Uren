@@ -1,0 +1,120 @@
+﻿@model IEnumerable<HellsTireProduct>
+
+    
+
+<!-- Begin Uren's Shop Left Sidebar Area -->
+<div class="shop-content_wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3 col-md-5 order-2 order-lg-1 order-md-1">
+                <div class="uren-sidebar-catagories_area">
+                    <div class="category-module uren-sidebar_categories">
+                        <div class="category-module_heading">
+                            <h5>Категории</h5>
+                        </div>
+                        <div class="module-body">
+                            <ul class="module-list_item">
+                                <vc:categories />
+                            </ul>
+                        </div>                
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-7 order-1 order-lg-2 order-md-2">
+                @foreach (var product in Model)
+                {
+
+                    <div class="shop-product-wrap grid listview img-hover-effect_area row">
+                        <div class="col-lg-4">
+                            <div class="product-slide_item">
+                                <div class="inner-slide">
+                                    <div class="single-product">
+                                        <div class="product-img">
+                                            <a href="">
+                                                @if (product.HellsTireProductImage != null)
+                                                {
+                                                    var base64 = Convert.ToBase64String(product.HellsTireProductImage);
+                                                    var imgSrc = string.Format("data:image/png;base64,{0}", base64);
+                                                    <img class="primary-img" src="@imgSrc" alt="Uren's Product Image">
+                                                }
+
+                                            </a>
+                                            <div class="add-actions">
+                                                <ul>
+                                                    <li>
+                                                        <a class="uren-add_cart" asp-controller="Cart" asp-action="Add" asp-route-id="@product.HellsTireProductID" data-toggle="tooltip" data-placement="top" title="Добавить в корзину">
+                                                            <i class="ion-bag"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="product-content">
+                                            <div class="product-desc_info">
+                                                <h6>
+                                                    <a class="product-name" href="single-product.html">
+                                                        @product.HellsTireProductName
+                                                    </a>
+                                                </h6>
+                                                <div class="price-box">
+                                                    <span class="new-price">@product.HellsTireProductPrice</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-slide_item">
+                                <div class="single-product">
+                                    <div class="product-img">
+                                        <a href="single-product.html">
+                                            @if (product.HellsTireProductImage != null)
+                                            {
+                                                var base64 = Convert.ToBase64String(product.HellsTireProductImage);
+                                                var imgSrc = string.Format("data:image/png;base64,{0}", base64);
+                                                <img class="primary-img" src="@imgSrc" alt="Uren's Product Image">
+                                            }
+                                        </a>
+                                    </div>
+                                    <div class="product-content">
+                                        <div class="product-desc_info">
+                                            <h6>
+                                                <a class="product-name" asp-controller="Shop" asp-action="Details" asp-route-id="@product.HellsTireProductID">
+                                                    @product.HellsTireProductName
+                                                </a>
+                                            </h6>
+                                            <div class="price-box">
+                                                <span class="new-price">@product.HellsTireProductPrice ₽</span>
+                                            </div>
+                                            <div class="product-short_desc">
+                                                <p>
+                                                    @Html.Raw(product.HellsTireProductDescriptions)
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="add-actions">
+                                            <ul>
+                                                <li>
+                                                    <a class="uren-add_cart" asp-controller="Cart" asp-action="Add" asp-route-id="@product.HellsTireProductID" data-toggle="tooltip" data-placement="top" title="Добавить в корзину">
+                                                        <i class="ion-bag"></i>
+                                                    </a>
+                                                </li>
+                                                <li class="quick-view-btn">
+                                                    <a asp-controller="Shop" asp-action="Details" asp-route-id="@product.HellsTireProductID" data-toggle="tooltip" data-placement="top" title="Детали">
+                                                        <i class="ion-android-options"></i>
+                                                    </a>
+                                                </li>
+                                                
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Uren's Shop Left Sidebar Area End Here -->

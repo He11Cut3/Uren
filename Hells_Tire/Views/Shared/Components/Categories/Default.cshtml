@@ -1,0 +1,13 @@
+﻿@model IEnumerable<HellsTireCategory>
+
+<ul class="list-group">
+    <li class="list-group-item">
+        <a href="@Url.Action("Index", "Shop")">Всё продукты</a>
+    </li>
+            @foreach (var item in Model)
+            {   <li class="list-group-item">
+                    <a href="@Url.Action("Index", "Shop", new { categoryId = item.HellsTireCategoryID })">@item.HellsTireCategoryName</a>
+                </li>
+            }
+    
+</ul>

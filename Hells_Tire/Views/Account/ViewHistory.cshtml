@@ -1,0 +1,73 @@
+﻿@model List<Order>
+
+<section id="pagebanner">
+    <div class="page-title">
+        <h2 class="white text-center">Просмотр истории</h2>
+    </div>
+</section>
+
+
+<section class="">
+    <div class="contact-inner">
+        <div class="col-md-6">
+            <div class="contact_form">
+
+<table class="table">
+    <thead>
+        <tr>
+             @if (User.IsInRole("Admin"))
+            {
+                <th>Пользователь</th>
+                <th>Почта</th>
+            }
+
+            <th>Дата заказа</th>
+            <th>Продукт</th>
+            <th>Кол-во</th>
+            <th>Стоимость (Итог)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            var totalOrderPrice = order.OrderItems.Sum(item => item.Quantity * item.Price);
+            <tr>
+                @if (User.IsInRole("Admin"))
+                {
+                    <td>
+                        @if (order.User != null)
+                        {
+                            @order.User.UserName
+                        }
+                    </td>
+                    <td>
+                        @if (order.User != null)
+                        {
+                            @order.User.Email
+                        }
+                    </td>
+                }
+                <td>@order.OrderDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                <td>
+                    @foreach (var orderItem in order.OrderItems)
+                    {
+                        <div>@orderItem.Product.HellsTireProductName</div>
+                    }
+                </td>
+                <td>
+                    @foreach (var orderItem in order.OrderItems)
+                    {
+                        <div>@orderItem.Quantity</div>
+                    }
+                </td>
+                <td>
+                    <div>@totalOrderPrice.ToString("C2")</div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+            </div>
+        </div>
+    </div>
+</section>
